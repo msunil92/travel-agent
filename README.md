@@ -90,3 +90,9 @@ python -m unittest discover -s tests -v
 The suite covers route and airport resolution, flight-result formatting and
 error handling, Tavily result formatting, request validation, and the web/API
 routes.
+
+## Live deployment
+
+The application is deployed on Vercel: [https://travel-agent-sepia-gamma.vercel.app/](https://travel-agent-sepia-gamma.vercel.app/)
+
+![Waypoint travel planner homepage](docs/screenshots/homepage.png)
