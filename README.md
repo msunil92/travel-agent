@@ -119,6 +119,6 @@ routes.
 
 ## Live deployment
 
-The application is deployed on Vercel: [https://travel-agent-sepia-gamma.vercel.app/](https://travel-agent-sepia-gamma.vercel.app/)
+The application is deployed on Vercel: [https://travel-agent-phi-inky.vercel.app/](https://travel-agent-phi-inky.vercel.app/)
 
 ![Waypoint travel planner homepage](docs/screenshots/homepage.png)
