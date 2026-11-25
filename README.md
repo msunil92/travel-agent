@@ -8,17 +8,18 @@ and a day-by-day itinerary.
 
 ```text
 .
-├── app.py                  # FastAPI routes and request validation
-├── backend.py              # LangGraph travel-planning workflow
-├── tools/
-│   ├── flight_tool.py      # AviationStack search and airport resolution
-│   └── tavily_tool.py      # Hotel and destination web research
-├── static/
-│   ├── index.html          # Responsive planner page
-│   ├── app.js              # Form handling and response rendering
-│   └── style.css           # Responsive dark glass UI
+├── pyproject.toml          # Installable package configuration
+├── src/
+│   ├── app.py              # FastAPI routes and request validation
+│   ├── service.py          # LangGraph travel-planning workflow
+│   ├── tools/
+│   │   ├── flight_tool.py  # AviationStack search and airport resolution
+│   │   └── tavily_tool.py  # Hotel and destination web research
+│   └── static/             # Responsive planner page and browser assets
 ├── tests/                  # Unit and API tests (external calls are mocked)
 ├── .env.example            # Environment variable template
+├── Dockerfile              # Container image definition
+├── .dockerignore           # Excludes local secrets and development files
 └── requirements.txt
 ```
 
@@ -40,7 +41,7 @@ From the project directory, create and activate a virtual environment:
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -e .
 ```
 
 On Windows PowerShell, activate it with:
@@ -48,6 +49,9 @@ On Windows PowerShell, activate it with:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
+
+The editable install reads runtime dependencies from `requirements.txt` and
+installs the application modules from `src`.
 
 Create a local environment file and add your API keys:
 
@@ -77,6 +81,29 @@ curl -X POST http://127.0.0.1:8000/api/ask \
   -H "Content-Type: application/json" \
   -d '{"question":"Plan a 5-day Sri Lanka trip from Bengaluru"}'
 ```
+
+## Run with Docker
+
+Build the image from the project directory:
+
+```bash
+docker build -t waypoint-travel-planner .
+```
+
+Run the container with your local environment file. The application listens on
+port `8000` inside the container and is available at
+[http://localhost:8000](http://localhost:8000):
+
+```bash
+docker run --rm --name waypoint-travel-planner \
+  --env-file .env \
+  -p 8000:8000 \
+  waypoint-travel-planner
+```
+
+The `.dockerignore` file prevents `.env`, the local virtual environment, test
+files, and development assets from being copied into the image. Pass secrets at
+runtime with `--env-file`; do not add API keys to the Dockerfile or image.
 
 ## Run tests
 

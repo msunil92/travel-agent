@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waypoint-travel-agent"
+version = "0.1.0"
+description = "An AI-assisted travel-planning web application."
+readme = "README.md"
+requires-python = ">=3.9"
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["app", "service"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["static", "tools"]
+
+[tool.setuptools.package-data]
+static = ["*.html", "*.js", "*.css"]
