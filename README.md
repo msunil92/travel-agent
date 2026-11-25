@@ -4,25 +4,6 @@ Waypoint is a small AI-assisted trip planner. Describe a trip in the web page
 to receive a travel overview, flight information when available, hotel research,
 and a day-by-day itinerary.
 
-## Project structure
-
-```text
-.
-├── pyproject.toml          # Installable package configuration
-├── src/
-│   ├── app.py              # FastAPI routes and request validation
-│   ├── service.py          # LangGraph travel-planning workflow
-│   ├── tools/
-│   │   ├── flight_tool.py  # AviationStack search and airport resolution
-│   │   └── tavily_tool.py  # Hotel and destination web research
-│   └── static/             # Responsive planner page and browser assets
-├── tests/                  # Unit and API tests (external calls are mocked)
-├── .env.example            # Environment variable template
-├── Dockerfile              # Container image definition
-├── .dockerignore           # Excludes local secrets and development files
-└── requirements.txt
-```
-
 ## Requirements
 
 - Python 3.9 or later
@@ -51,7 +32,7 @@ On Windows PowerShell, activate it with:
 ```
 
 The editable install reads runtime dependencies from `requirements.txt` and
-installs the application modules from `src`.
+installs the application modules, tools, and static assets from the project root.
 
 Create a local environment file and add your API keys:
 
@@ -62,6 +43,24 @@ cp .env.example .env
 Set `GROQ_API_KEY` and `TRAVILY_API_KEY` in `.env`. Set
 `AVIATIONSTACK_API_KEY` if live flight status is desired. `.env` is ignored by
 Git; do not commit real API keys.
+
+## Project structure
+
+```text
+.
+├── pyproject.toml          # Installable package configuration
+├── app.py                  # FastAPI routes and request validation
+├── service.py              # LangGraph travel-planning workflow
+├── tools/
+│   ├── flight_tool.py      # AviationStack search and airport resolution
+│   └── tavily_tool.py      # Hotel and destination web research
+├── static/                 # Responsive planner page and browser assets
+├── tests/                  # Unit and API tests (external calls are mocked)
+├── .env.example            # Environment variable template
+├── Dockerfile              # Container image definition
+├── .dockerignore           # Excludes local secrets and development files
+└── requirements.txt
+```
 
 ## Run the application
 

@@ -14,12 +14,8 @@ dynamic = ["dependencies"]
 dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools]
-package-dir = {"" = "src"}
 py-modules = ["app", "service"]
-
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["static", "tools"]
+packages = ["static", "tools"]
 
 [tool.setuptools.package-data]
 static = ["*.html", "*.js", "*.css"]

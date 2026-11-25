@@ -11,7 +11,9 @@ COPY pyproject.toml README.md requirements.txt ./
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=appuser:appuser src ./src
+COPY --chown=appuser:appuser app.py service.py ./
+COPY --chown=appuser:appuser tools ./tools
+COPY --chown=appuser:appuser static ./static
 RUN pip install --no-cache-dir --no-deps .
 
 USER appuser

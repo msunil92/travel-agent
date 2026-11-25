@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 from starlette.concurrency import run_in_threadpool
 
-from backend import run_travel_agent
+from service import run_travel_agent
 
 
 app = FastAPI(title="Waypoint Travel Planner")
